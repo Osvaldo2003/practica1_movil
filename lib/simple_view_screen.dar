@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+class SimpleViewScreen extends StatefulWidget {
+  const SimpleViewScreen({super.key});
+
+  @override
+  State<SimpleViewScreen> createState() => _SimpleViewScreenState();
+}
+
+class _SimpleViewScreenState extends State<SimpleViewScreen> {
+  int _selectedIndex = 2;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/home'); // Navegar a la pantalla principal
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/register'); // Navegar a la pantalla de registro
+        break;
+      case 2:
+        // Estamos en esta pantalla, no hacemos nada
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Simple View'), // Título del AppBar
+        backgroundColor: Colors.orange, // Color del AppBar
+      ),
+      body: Center(
+        child: const Text(
+          'Esta es la vista Simple', // Mensaje central en la pantalla
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Registrar Contacto',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.view_list),
+            label: 'Simple View',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.orange, // Color del ítem seleccionado
+        onTap: _onItemTapped,
+      ),
+    );
+  }
+}
